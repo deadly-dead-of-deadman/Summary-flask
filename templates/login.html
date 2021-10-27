@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Авторизация</title>
+</head>
+<body>
+<div class="topnav" align="center">
+    <style>
+        body{background-image: url(/static/back.png);
+        font-family: Arial,serif}
+        form{font-family: Arial,serif}
+    </style>
+    <h2>
+  <a class="active" href="/">Главная</a>
+    </h2>
+    Авторизация
+    {% if user %}
+    <br>Вы авторизованы
+    {% endif %}
+    <form action="/login"  method='POST' class="form-contact">
+        <p><label>Логин: </label>
+            <label>
+                <input type="text" name="login" value="" required />
+            </label>
+        <p><label>Пароль: </label>
+            <label>
+                <input type="password" name="password" value="" required />
+            </label>
+        <p><label>Пароль админа(если известен): </label>
+        <label>
+            <input type="password" name="admin_password" value="" />
+        </label>
+        <p><label>
+
+        </label>
+        <p><input type="submit" value="Войти"></p>
+        <p><a href="{{url_for('register')}}">Регистрация</a> </p>
+    </form>
+</div>
+</body>
+</html>

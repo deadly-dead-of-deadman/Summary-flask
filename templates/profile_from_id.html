@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Резюме {{profile.id}}</title>
+</head>
+    <style>
+      body{background-image: url(/static/back.png);
+      font-family: Arial,serif}
+        h2 { align-content: center;
+        }
+        .content_img {
+            align-content: center;
+            display: block;
+            max-width:85%;
+            max-height:85%;
+            margin: 1ex auto;
+        }
+    </style>
+<body>
+
+<div class="topnav" align="center">
+
+    <h2>
+        <a class="active" href="/">Главная</a> |
+            {% if not current_user %}
+        <a href="/register">Войти или Зарегистрироваться</a> |
+            {% else %}
+         <a href="/logout">Выйти</a> |
+            {% endif %}
+            {% if is_admin == 1 %}
+        <a href="/admin">Панель администратора</a> |
+            {% endif %}
+            {% if profile.creator == current_user %}
+        <a href="/edit/{{profile.id}}">Редактировать</a> |
+            {% endif %}
+         <a href="/upload/{{profile.id}}">Загрузить аватар</a>
+    </h2>
+</div>
+
+<div class="content_img">
+        {% if  profile.avatar == "default"%}
+        <img class="content_img" src={{ url_for('static', filename = 'default.png') }} width="300" height="300" align="center">
+        {% else %}
+        <img class="content_img" src={{ url_for('static', filename = profile.avatar) }} width="300" height="300" align="center">
+        {% endif %}
+</div>
+    <p align="center" style="font-size:30px">{{profile.name}} {{profile.surname}}</p>
+    <p align="center" style="font-size:20px">{{profile.about}}</p>
+</body>
+</html>

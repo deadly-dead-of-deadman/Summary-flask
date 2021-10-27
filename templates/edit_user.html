@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Редактирование логина/пароля</title>
+</head>
+<body>
+<div class="topnav" align="center">
+  <style>
+      body{background-image: url(/static/back.png);
+      font-family: Arial,serif}
+        h2 { text-align: center }
+        h1 {text-align: center}
+        form{text-align: center}
+  </style>
+    <h2>
+        <a class="active" href="/">Главная</a>
+            {% if user %}
+        <a href="{{url_for('register')}}">Войти или Зарегистрироваться</a>
+            {% else %}
+         <a href="{{url_for('logout')}}">Выйти</a>
+        <a href="{{url_for('logout')}}">Сменить логин или пароль</a>
+            {% endif %}
+            {% if is_admin == 1 %}
+        <a href="{{url_for('admin')}}">Панель администратора</a>
+            {% endif %}
+    </h2>
+</div>
+<h1>Редактировать портфолио</h1>
+<form method = 'post'>
+    <input type="text" name ="login" id="login" placeholder="Введите новый логин"><br><br>
+    <textarea type="password" name="old_pass" id ="old_pass" placeholder="Введите пароль"></textarea><br><br>
+    <textarea type="password" name="new_pass" id ="new_pass" placeholder="Введите новый пароль"></textarea><br><br>
+
+    <input type="submit" value="Сохранить">
+</form>
+</body>
+</html>

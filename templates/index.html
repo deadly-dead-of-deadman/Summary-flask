@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Главная</title>
+</head>
+
+<body>
+
+<div class="topnav" align="center">
+    <style>
+        body{background-image: url(/static/back.png);
+        font-family: Arial,serif}
+        h2 { margin-left: 10px; }
+    </style>
+    <h2>
+      | <a class="active" href="/">Главная</a> |
+            {% if not current_user %}
+        <a href="/register">Войти или Зарегистрироваться</a> |
+            {% else %}
+         <a href="/logout">Выйти</a> |
+            {% endif %}
+            {% if is_admin == 1 %}
+        <a href="/admin">Панель администратора</a>
+            {% endif %}
+    </h2>
+
+</div>
+
+<h2 align ="center" >&nbsp;Все портфолио на сайте&nbsp;</h2>
+<h3 align ="center">
+<a href="/profile">&nbsp;Создать портфолио&nbsp;</a>
+</h3>
+<table align="center">
+    <tr>
+        <th>Ваше резюме(+)</th>
+    <th>Id</th>
+    <th>Имя</th>
+    <th>Фамилия</th>
+  </tr>
+{% for el in  profiles %}
+<tr>
+    <td>{% if el.creator == current_user %}
+            +
+    {% else %}
+            -
+    {% endif %}</td>
+    <td> {{el.id}} </td>
+    <td> {{el.name}} </td>
+    <td> {{el.surname}} </td>
+    <td>
+        <a href="/profiles/{{ el.id }}" class="button">открыть</a>
+    </td>
+  </tr>
+{% endfor %}
+</table>
+</body>
+</html>

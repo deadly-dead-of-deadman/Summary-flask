@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Создание резюме</title>
+</head>
+<body>
+<div class="topnav" align="center">
+  <style>
+        body{background-image: url(/static/back.png);
+        font-family: Arial,serif}
+        form{text-align: center;
+        font-family: Arial,serif}
+        h1{text-align: center}
+    </style>
+    <h2>
+        <a class="active" href="/">Главная</a>
+            {% if not current_user %}
+        <a href="/register">Войти или Зарегистрироваться</a>
+            {% else %}
+        <a href="/logout">Выйти</a>
+            {% endif %}
+            {% if is_admin == 1 %}
+        <a href="/admin">Панель администратора</a>
+            {% endif %}
+    </h2>
+</div>
+<h1>Создание портфолио</h1>
+<form method = 'post' >
+    <input type="text" name ="name" id="name" placeholder="Введите имя"><br><br>
+    <textarea name="surname" id ="surname" placeholder="Введите фамилию"></textarea><br><br>
+    <textarea name="about" id ="about" placeholder="О себе."></textarea><br><br>
+    <input type="submit" value="Сохранить">
+</form>
+</body>
+</html>
