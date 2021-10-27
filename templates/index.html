@@ -29,7 +29,7 @@
 
 <h2 align ="center" >&nbsp;Все портфолио на сайте&nbsp;</h2>
 <h3 align ="center">
-    {% if not current_user %}
+    {% if current_user %}
 <a href="/profile">&nbsp;Создать портфолио&nbsp;</a>
     {% endif %}
 </h3>
