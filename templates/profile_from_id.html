@@ -33,8 +33,9 @@
             {% endif %}
             {% if profile.creator == current_user %}
         <a href="/edit/{{profile.id}}">Редактировать</a> |
+        <a href="/upload/{{profile.id}}">Загрузить аватар</a>
             {% endif %}
-         <a href="/upload/{{profile.id}}">Загрузить аватар</a>
+
     </h2>
 </div>
 
