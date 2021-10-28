@@ -8,6 +8,7 @@ from werkzeug.utils import secure_filename
 
 from UserLogin import UserLogin
 from flask_admin import Admin
+from flask_admin import AdminIndexView
 from flask_admin.contrib.sqla import ModelView
 
 app = Flask(__name__)
@@ -21,7 +22,7 @@ admin_pass_hashed = hash(admin_pass)
 MAX_CONTENT_LENGTH = 16 * 1024 * 1024
 db = SQLAlchemy(app)
 login_manager = LoginManager(app)
-admin = Admin(app)
+
 USER_ID = 0
 
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
@@ -63,7 +64,7 @@ def load_user(user_id):
     return user_login.fromDB(user_id, Users)
 
 
-class SecureModelView(ModelView):
+class AdminMixin:
     def is_accessible(self):
         if not current_user.get_id() is None:
             user = Users.query.get(current_user.get_id())
@@ -73,9 +74,18 @@ class SecureModelView(ModelView):
             return False
 
     def inaccessible_callback(self, name, **kwargs):
-        return "Вы не являетеся админом"
+        return redirect("/")
 
 
+class SecureModelView(AdminMixin, ModelView):
+    pass
+
+
+class HomeAdminView(AdminIndexView):
+    pass
+
+
+admin = Admin(app, 'Главная', url='/', index_view=HomeAdminView(name='Home'))
 admin.add_view(SecureModelView(Users, db.session))
 admin.add_view(SecureModelView(Profile, db.session))
 
