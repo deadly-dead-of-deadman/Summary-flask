@@ -187,7 +187,7 @@ def profile():
             else:
                 return False, "unknown error adding user"
     else:
-        return render_template('profile.html', cur_id=cur_id, is_admin=is_admin)
+        return render_template('profile_creation.html', cur_id=cur_id, is_admin=is_admin)
 
 
 # Просмотр профиля по ID
@@ -238,7 +238,7 @@ def edit_user(user):
     user_from_db = Users.query.get(current_user.get_id())
     if user_from_db.id == current_user.get_id():
         if request.method == 'GET':
-            return render_template('edit_user.html', )
+            return render_template('edit_user.html')
         if request.method == 'POST':
             new_login = request.form['login']
             old_pass = request.form.get('old_password', False)
@@ -276,7 +276,7 @@ def upload(prof_id):
             profile_from_db.avatar = filename
             db.session.commit()
             return redirect('/profiles/' + str(prof_id))
-    return render_template('upload.html')
+    return render_template('upload_img.html')
 
 
 if __name__ == "__main__":

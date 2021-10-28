@@ -41,12 +41,13 @@
     <th>Фамилия</th>
   </tr>
 {% for el in  profiles %}
-<tr>
+    <tr>
     <td>{% if el.creator == current_user %}
             +
     {% else %}
             -
-    {% endif %}</td>
+    {% endif %}
+    </td>
     <td> {{el.id}} </td>
     <td> {{el.name}} </td>
     <td> {{el.surname}} </td>
