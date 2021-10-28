@@ -10,6 +10,7 @@
         body{background-image: url(/static/back.png);
         font-family: Arial,serif}
         h2 { text-align: center }
+        h3 { text-align: center }
         h1 {text-align: center}
         form{text-align: center;
         font-family: Arial,serif}
@@ -28,6 +29,8 @@
     </h2>
 </div>
 <h1>Редактировать портфолио</h1>
+<h3><a class="active"  href="/delete/{{profile.id}}">Удалить портфолио</a></h3>
+
 <form method = 'post'>
     <input type="text" name ="name" id="name" placeholder={{profile.name}}><br><br>
     <textarea name="surname" id ="surname" placeholder={{profile.surname}}></textarea><br><br>

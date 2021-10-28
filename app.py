@@ -279,5 +279,21 @@ def upload(prof_id):
     return render_template('upload_img.html')
 
 
+@app.route("/delete/<prof_id>", methods=["POST", "GET"])
+@login_required
+def delete_profile(prof_id):
+    profile_from_db = Profile.query.get(prof_id)
+    if current_user.get_id() == profile_from_db.creator:
+        print("ДА")
+        try:
+            Profile.query.filter(Profile.id == prof_id).delete()
+            db.session.commit()
+            return redirect('/')
+        except:
+            return "При удалении профиля произошла ошибка"
+    else:
+        return redirect("/profiles/ " + str(prof_id))
+
+
 if __name__ == "__main__":
     app.run(debug=True)
